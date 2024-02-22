@@ -21,6 +21,7 @@ const port = process.env.PORT || 5000;
 
 
 app.use("/api/auth", Auth);
+app.use("/api/equipment", Equipment);
 
 
 
