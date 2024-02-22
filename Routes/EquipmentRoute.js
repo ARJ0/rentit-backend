@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllEquipment, getEquipmentByCompnyId } from '../Controllers/EquipmentController.js';
+import { getAllEquipment,uploadEquipment, getEquipmentByCompnyId } from '../Controllers/EquipmentController.js';
 
 const router = Router();
 
