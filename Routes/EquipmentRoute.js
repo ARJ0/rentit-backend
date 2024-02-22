@@ -4,6 +4,7 @@ import { getAllEquipment, getEquipmentByCompnyId } from '../Controllers/Equipmen
 const router = Router();
 
 
+router.post("/add", uploadEquipment.validator, uploadEquipment.controller);
 
 router.post("/getEquipmentByCompnyId", getEquipmentByCompnyId.validator,  getEquipmentByCompnyId.controller);
 router.get("/getAllEquipment", getAllEquipment.controller);
