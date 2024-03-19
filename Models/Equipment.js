@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Mongoose from "mongoose";
 
 const EquipmentSchema = new Mongoose.Schema(
@@ -64,10 +65,24 @@ const EquipmentSchema = new Mongoose.Schema(
             max: 5,
             default: 0
         },
-        compnyId: {
-            type: String,
-            required: true
-        }
+        companyId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        isRented: {
+            type: Boolean,
+            default: false,
+        },
+        unavailableUntil: {
+            type: Date,
+            default: null,
+        },
+        isDeleted: {
+            type: Boolean,
+            default: false,
+        },
+    
     }, { timestamps: true }
 )
 
