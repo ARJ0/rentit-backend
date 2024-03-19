@@ -7,24 +7,50 @@ dotenv.config();
 
 export const register = {
     validator: async (req, res, next) => {
-        if (!req.body.mobile || !req.body.email || !req.body.password || !req.body.account_type || !req.body.address ||
-            !req.body.city||
-            !req.body.state || 
-            !req.body.postal_code ) {
-            return res.status(400).send("Please Fill all the Fields");
+        const errors = [];
+
+        if (!req.body.mobile) {
+            errors.push("Mobile number is required");
         }
-        if (req.body.account_type === "company" && !req.body.company_name) {
-            return res.status(400).send("Company name is Required");
+
+        if (!req.body.email) {
+            errors.push("Email address is required");
         }
-        if (req.body.account_type === "user" && (!req.body.lname || !req.body.fname)) {
-            return res.status(400).send("Please Fill Name's the Fields");
-        }
-        if (req.body.password.length < 8) {
-            return res.status(400).send("Password must be atleast 8 characters");
-        }
+
         if (!req.body.password) {
-            return res.status(400).send("Password and Confirm Password Field Must be Same");
+            errors.push("Password is required");
+        } else if (req.body.password.length < 8) {
+            errors.push("Password must be at least 8 characters");
         }
+
+        if (!req.body.account_type) {
+            errors.push("Account type is required");
+        } else if (req.body.account_type === "company" && !req.body.company_name) {
+            errors.push("Company name is required for company accounts");
+        } else if (req.body.account_type === "user" && (!req.body.lname || !req.body.fname)) {
+            errors.push("First name and last name are required for user accounts");
+        }
+
+        if (!req.body.address) {
+            errors.push("Address is required");
+        }
+
+        if (!req.body.city) {
+            errors.push("City is required");
+        }
+
+        if (!req.body.state) {
+            errors.push("State is required");
+        }
+
+        if (!req.body.postal_code) {
+            errors.push("Postal code is required");
+        }
+
+        if (errors.length > 0) {
+            return res.status(400).json({ errors });
+        }
+
         next();
     },
     controller: async (req, res) => {
