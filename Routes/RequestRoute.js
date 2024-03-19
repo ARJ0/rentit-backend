@@ -1,15 +1,14 @@
 import { Router } from 'express';
-import { createRequest, getUserRequests, manageRequestStatus, getUserOwnedRequests, getAllUserRequest } from '../Controllers/RequestController.js';
+import { editEquipment, getAllAndSearchEquipment, getEquipmentByCompanyIdAndSearch, uploadEquipment, deleteEquipment } from '../Controllers/EquipmentController.js';
 
 const router = Router();
 
 
-router.post("/createRequest", createRequest.validator, createRequest.controller);
-router.get("/getUserRequests", getUserRequests.validator, getUserRequests.controller);
-router.get("/getUserOwnedRequests", getUserOwnedRequests.validator, getUserOwnedRequests.controller);
-router.get("/getAllUserRequest", getAllUserRequest.validator, getAllUserRequest.controller);
-router.post("/manageRequestStatus", manageRequestStatus.validator, manageRequestStatus.controller);
-
+router.post("/add", uploadEquipment.validator, uploadEquipment.controller);
+router.put('/edit-equipment', editEquipment.validator, editEquipment.controller);
+router.put('/delete-equipment', deleteEquipment.validator, deleteEquipment.controller);
+router.get('/getAllAndSearchEquipment', getAllAndSearchEquipment.controller)
+router.get('/getEquipmentByCompanyIdAndSearch', getEquipmentByCompanyIdAndSearch.validator, getEquipmentByCompanyIdAndSearch.controller)
 
 
 
